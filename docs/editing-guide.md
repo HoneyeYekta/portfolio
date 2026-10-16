@@ -21,7 +21,7 @@ page and reads from `profile.json`.
 
 | What | Where |
 |---|---|
-| Name, headline, tagline, summary, location, links, availability, "Made with" line | `src/data/profile.json` |
+| Name, headline, tagline, intro paragraphs (`summary`, each with an optional `icon`), short `metaDescription` for search and social previews, location, links, availability, "Made with" line | `src/data/profile.json` |
 | Work and additional experience (see below) | `src/data/experience.json` |
 | Skills and tools (with optional level like "Developing") | `src/data/skills.json` |
 | Education and languages | `src/data/education.json` |

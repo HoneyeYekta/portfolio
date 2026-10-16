@@ -3,7 +3,28 @@
   "headline": "HR professional · HR data & People Analytics",
   "tagline": "Turning HR data into decisions people can act on.",
   "location": "Utrecht, Netherlands",
-  "summary": "HR professional with experience in recruitment analytics, reporting, KPI tracking and process improvement. Experienced in using recruitment data and HR systems to identify bottlenecks, improve data quality and support data-informed decisions. Building on this background to transition into People Analytics and HR Data Analytics.",
+  "metaDescription": "Honeye Yekta is an HR professional in Utrecht moving from talent acquisition into People Analytics and HR data. Projects, experience and things learned along the way.",
+  "summary": [
+    {
+      "text": "Hi, I’m Honeye, an HR professional based in Utrecht, the Netherlands."
+    },
+    {
+      "icon": "users",
+      "text": "My career started in talent acquisition, where I worked closely with recruitment processes and saw how everyday decisions shape the experience of both candidates and hiring teams. Along the way, I became curious about something beyond the day-to-day work: what can the data tell us about how these processes actually work, and how can we make them better?"
+    },
+    {
+      "icon": "chart",
+      "text": "That question sparked my interest in People Analytics and HR Data. I enjoy connecting the dots between HR knowledge, data and real-world challenges, finding patterns, understanding what is behind them, and turning insights into practical improvements."
+    },
+    {
+      "icon": "briefcase",
+      "text": "Today, I’m building on my HR background and developing my analytical skills, with a particular interest in People Analytics and HR Data roles. I’m also open to broader HR opportunities where I can contribute, keep learning and help make people processes work better."
+    },
+    {
+      "icon": "heart",
+      "text": "This website is where I share my projects, experience and the things I’m learning along the way. I’m glad you’re here!"
+    }
+  ],
   "availability": "Open to People Analytics and HR data roles in the Netherlands. No visa sponsorship required.",
   "madeWith": "Made with ♥ in Utrecht",
   "photo": {

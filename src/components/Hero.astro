@@ -2,13 +2,25 @@
 import profile from '../data/profile.json';
 import ExternalIcon from './ExternalIcon.astro';
 import EmailLink from './EmailLink.astro';
+import Icon from './Icon.astro';
+import type { IconName } from './Icon.astro';
+
 const { links } = profile;
+const [lead, ...story] = profile.summary as { text: string; icon?: string }[];
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <p class="eyebrow">{profile.headline}</p>
   <h1 id="hero-title">{profile.tagline}</h1>
-  <p class="summary muted">{profile.summary}</p>
+  {lead && <p class="lead">{lead.text}</p>}
+  <div class="story">
+    {story.map((p) => (
+      <p class="story-p muted">
+        {p.icon && <Icon name={p.icon as IconName} class="icon story-icon" />}
+        <span>{p.text}</span>
+      </p>
+    ))}
+  </div>
   <div class="actions">
     <a class="btn btn-primary" href={links.linkedin} target="_blank" rel="me noopener">LinkedIn <ExternalIcon /></a>
     <a class="btn" href={links.github} target="_blank" rel="me noopener">GitHub <ExternalIcon /></a>
@@ -37,11 +49,32 @@ const { links } = profile;
     font-size: clamp(1.7rem, 4.5vw, 2.3rem);
     max-width: 22ch;
   }
-  .summary {
+  .lead {
+    font-size: 1.1rem;
+    margin-top: 16px;
     max-width: 58ch;
+  }
+  .story {
+    display: grid;
+    gap: 14px;
     margin-top: 14px;
+    max-width: 62ch;
+  }
+  .story-p {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 12px;
+    margin: 0;
+    font-size: 0.98rem;
+  }
+  .story-p :global(.story-icon) {
+    width: 18px;
+    height: 18px;
+    margin-top: 0.3em;
+    color: var(--accent);
+    opacity: 0.85;
   }
   .actions {
-    margin-top: 20px;
+    margin-top: 22px;
   }
 </style>
