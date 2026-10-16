@@ -33,7 +33,7 @@ page and reads from `profile.json`.
 
 ### Experience entries
 
-Each entry in `experience.json` has a `kind`:
+Each entry in `experience.json` has an `icon` (shown in the circle next to the entry) and a `kind`:
 
 - `hr` — shown under "Professional experience" and drawn in blue on the timeline
 - `other` — side projects and ventures, shown under "Relocation to the Netherlands & additional experience", teal on the timeline
@@ -43,13 +43,20 @@ Dates are `"YYYY-MM"`, or just `"YYYY"` when only the year is known; `"to": null
 career timeline on the homepage is drawn from these dates, so fixing a date there updates the chart.
 Durations are only shown when both dates include a month.
 
+Available icon names (used by experience entries, hobbies and page headings): `users`, `globe`, `book`,
+`code`, `palette`, `graduation`, `briefcase`, `chart`, `sparkles`, `heart`, `camera`, `pen`, `dice`,
+`cookie`, `tools`, `star`, `home`, `mail`. New ones are added in `src/components/Icon.astro` as a
+single SVG path.
+
 ### Hobby photos
 
-Each hobby in `hobbies.json` lists its photos with a full-size `src`, a `thumb`, an `alt` description
+Each hobby in `hobbies.json` has an `icon` and lists its photos with a full-size `src`, a `thumb`, an `alt` description
 and the thumbnail's `w`/`h`. Photos live in `public/images/hobbies/<hobby>/` as `01.jpg` (full size,
 longest side 1600 px) and `01-thumb.jpg` (longest side 800 px). Resize new photos before adding them;
 camera originals are far too large for a web page. A hobby with one photo shows it at its natural
-shape, two photos side by side, three or more as a mosaic with a large lead image.
+shape, two photos side by side, three or more as a mosaic with a large lead image. Clicking a photo opens it in an in-page
+viewer with previous/next arrows; Escape, the close button, a tap outside or the browser back button
+closes it.
 
 ### Other tips
 

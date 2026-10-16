@@ -1,27 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
 import hobbies from '../data/hobbies.json';
+import Lightbox from '../components/Lightbox.astro';
+import PageHead from '../components/PageHead.astro';
+import Icon from '../components/Icon.astro';
+import type { IconName } from '../components/Icon.astro';
 ---
 
 <Base title="Hobbies & interests" description="What Honeye Yekta gets up to outside work: photo journaling, playful illustration, party games and baking.">
-  <header class="page-head">
-    <p class="eyebrow">Beyond work</p>
-    <h1>Hobbies & interests</h1>
-    <p class="lead muted">A few things I make, bake and play when I am not looking at HR data.</p>
-  </header>
+  <PageHead icon="heart" eyebrow="Beyond work" title="Hobbies & interests" lead="A few things I make, bake and play when I am not looking at HR data." />
 
   <div class="hobbies">
     {hobbies.map((h, i) => (
       <section class="hobby" id={h.slug} aria-labelledby={`${h.slug}-title`}>
         <div class="text">
-          <p class="eyebrow nums">{String(i + 1).padStart(2, '0')}</p>
+          <p class="eyebrow nums">{h.icon && <Icon name={h.icon as IconName} class="icon eyebrow-icon" />}{String(i + 1).padStart(2, '0')}</p>
           <h2 id={`${h.slug}-title`}>{h.title}</h2>
           <p class="muted">{h.description}</p>
         </div>
         <ul class:list={['gallery', `n-${Math.min(h.images.length, 3)}`]} aria-label={`${h.title} photos`}>
           {h.images.map((img) => (
             <li>
-              <a href={img.src} target="_blank" rel="noopener" aria-label={`Open full-size photo: ${img.alt}`}>
+              <a href={img.src} data-lb={h.slug} aria-label={`View photo: ${img.alt}`}>
                 <img src={img.thumb} alt={img.alt} loading="lazy" width={img.w} height={img.h} />
               </a>
             </li>
@@ -30,6 +30,8 @@ import hobbies from '../data/hobbies.json';
       </section>
     ))}
   </div>
+
+  <Lightbox />
 </Base>
 
 <style>

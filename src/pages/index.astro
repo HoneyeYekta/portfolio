@@ -20,7 +20,7 @@ const latest = published.slice(0, 2);
     <CareerTimeline />
   </div>
 
-  <Section id="latest" title="Latest projects" moreHref="/projects/" moreLabel="All projects">
+  <Section id="latest" icon="chart" title="Latest projects" moreHref="/projects/" moreLabel="All projects">
     <div class="grid">
       {latest.map((p) => <ProjectCard project={p} />)}
     </div>

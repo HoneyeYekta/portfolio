@@ -1,14 +1,60 @@
 ---
+export type IconName =
+  | 'linkedin'
+  | 'github'
+  | 'mail'
+  | 'arrow-left'
+  | 'users'
+  | 'globe'
+  | 'book'
+  | 'code'
+  | 'palette'
+  | 'graduation'
+  | 'close'
+  | 'chevron-left'
+  | 'chevron-right'
+  | 'home'
+  | 'chart'
+  | 'briefcase'
+  | 'sparkles'
+  | 'heart'
+  | 'camera'
+  | 'pen'
+  | 'dice'
+  | 'cookie'
+  | 'tools'
+  | 'star';
+
 interface Props {
-  name: 'linkedin' | 'github' | 'mail' | 'arrow-left';
+  name: IconName;
   class?: string;
 }
 const { name, class: cls = 'icon' } = Astro.props;
-const paths: Record<Props['name'], string> = {
+const paths: Record<IconName, string> = {
   linkedin: 'M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18',
   github: 'm8 6-5 6 5 6M16 6l5 6-5 6M14 4l-4 16',
+  code: 'm8 6-5 6 5 6M16 6l5 6-5 6M14 4l-4 16',
   mail: 'M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm0 1 9 6 9-6',
   'arrow-left': 'M19 12H5m6-6-6 6 6 6',
+  users: 'M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM2.5 20a6.5 6.5 0 0 1 13 0M16 4.3a3.5 3.5 0 0 1 0 6.4M17.5 14a6.5 6.5 0 0 1 4 6',
+  globe: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM3 12h18M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18',
+  book: 'M12 6.5A4 4 0 0 0 8.5 4H3v15h5.5a3.5 3.5 0 0 1 3.5 2M12 6.5A4 4 0 0 1 15.5 4H21v15h-5.5a3.5 3.5 0 0 0-3.5 2M12 6.5V21',
+  palette: 'M12 3a9 9 0 0 0 0 18c1.4 0 2.2-.9 2.2-2 0-.9-.6-1.3-.6-2.2 0-1 .8-1.8 1.9-1.8H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3zM7.5 11h.01M10 7.5h.01M14.5 7.5h.01',
+  graduation: 'M2 9.5 12 5l10 4.5-10 4.5zM6 11.3V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.7M22 9.5V15',
+  close: 'M6 6l12 12M18 6 6 18',
+  'chevron-left': 'm15 5-7 7 7 7',
+  'chevron-right': 'm9 5 7 7-7 7',
+  home: 'M3 11 12 4l9 7M5 10v10h5v-6h4v6h5V10',
+  chart: 'M4 20h16M7 16v-5M12 16V8M17 16v-9',
+  briefcase: 'M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18',
+  sparkles: 'M12 4l1.6 4.4L18 10l-4.4 1.6L12 16l-1.6-4.4L6 10l4.4-1.6zM19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7zM5 3l.6 1.4L7 5l-1.4.6L5 7l-.6-1.4L3 5l1.4-.6z',
+  heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z',
+  camera: 'M4 8h3l2-3h6l2 3h3v11H4zM12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z',
+  pen: 'm3 21 3.5-1L18 8.5 15.5 6 4 17.5zM15.5 6 18 8.5M17 4l3 3',
+  dice: 'M7 4h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zM8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01',
+  cookie: 'M12 3a9 9 0 1 0 9 9 3 3 0 0 1-3-3 3 3 0 0 1-3-3 3 3 0 0 1-3-3zM9 10h.01M8 15h.01M13 16h.01M15 12h.01',
+  tools: 'M20 7l-3 3-3-3 3-3a4 4 0 0 0-5.2 5.2L4 17.5 6.5 20l8.3-7.8A4 4 0 0 0 20 7z',
+  star: 'm12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z',
 };
 ---
 

@@ -2,36 +2,47 @@
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import ExperienceItem from '../components/ExperienceItem.astro';
+import RailItem from '../components/RailItem.astro';
+import PageHead from '../components/PageHead.astro';
 import experience from '../data/experience.json';
 import education from '../data/education.json';
+import type { IconName } from '../components/Icon.astro';
 
+type Kind = 'hr' | 'other' | 'training';
 const hr = experience.filter((e) => e.kind === 'hr');
 const additional = experience.filter((e) => e.kind !== 'hr');
 ---
 
 <Base title="Experience" description="Work experience, additional experience and education of Honeye Yekta.">
-  <header class="page-head">
-    <p class="eyebrow">Experience</p>
-    <h1>Where I have worked</h1>
-    <p class="lead muted">Talent acquisition roles where I started using data to understand and improve the hiring process, and what I have been building since moving to the Netherlands.</p>
-  </header>
+  <PageHead
+    icon="briefcase"
+    eyebrow="Experience"
+    title="Where I have worked"
+    lead="Talent acquisition roles where I started using data to understand and improve the hiring process, and what I have been building since moving to the Netherlands."
+  />
 
   <h2 class="group-title">Professional experience</h2>
-  {hr.map((job) => <ExperienceItem {...job} />)}
+  <div class="group">
+    {hr.map((job) => <ExperienceItem {...job} kind={job.kind as Kind} icon={job.icon as IconName} />)}
+  </div>
 
-  <Section id="additional" title="Relocation to the Netherlands & additional experience">
-    {additional.map((job) => <ExperienceItem {...job} />)}
+  <Section id="additional" icon="globe" title="Relocation to the Netherlands & additional experience">
+    <div class="group">
+      {additional.map((job) => <ExperienceItem {...job} kind={job.kind as Kind} icon={job.icon as IconName} />)}
+    </div>
   </Section>
 
-  <Section id="education" title="Education">
-    <ul class="plain">
+  <Section id="education" icon="graduation" title="Education">
+    <div class="group">
       {education.degrees.map((d) => (
-        <li>
-          <span>{d.title}</span>
-          <span class="small muted">{d.school}</span>
-        </li>
+        <RailItem icon="graduation">
+          <div class="degree">
+            <span>{d.title}</span>
+            <span class="small muted">{d.school}</span>
+          </div>
+        </RailItem>
       ))}
-    </ul>
+    </div>
   </Section>
 </Base>
 
@@ -40,14 +51,7 @@ const additional = experience.filter((e) => e.kind !== 'hr');
     font-size: 1.125rem;
     margin-bottom: 18px;
   }
-  .plain {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 12px;
-  }
-  .plain li {
+  .degree {
     display: grid;
     gap: 1px;
   }

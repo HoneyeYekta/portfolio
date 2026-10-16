@@ -1,13 +1,17 @@
 ---
+import Icon from './Icon.astro';
+import type { IconName } from './Icon.astro';
+
 interface Props {
   label: string;
+  icon?: IconName;
   items: (string | { name: string; level?: string })[];
 }
-const { label, items } = Astro.props;
+const { label, icon, items } = Astro.props;
 ---
 
 <div class="group">
-  <h3 class="small muted">{label}</h3>
+  <h3 class="small muted">{icon && <Icon name={icon} class="icon group-icon" />}{label}</h3>
   <ul class="chips" aria-label={label}>
     {items.map((item) =>
       typeof item === 'string' ? (
@@ -29,5 +33,11 @@ const { label, items } = Astro.props;
   h3 {
     font-weight: 500;
     margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+  }
+  h3 :global(.group-icon) {
+    color: var(--ink-3);
   }
 </style>

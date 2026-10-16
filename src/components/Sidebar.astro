@@ -1,13 +1,15 @@
 ---
 import profile from '../data/profile.json';
 import ContactLinks from './ContactLinks.astro';
+import Icon from './Icon.astro';
+import type { IconName } from './Icon.astro';
 
-const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/projects/', label: 'Projects' },
-  { href: '/experience/', label: 'Experience' },
-  { href: '/skills/', label: 'Skills' },
-  { href: '/hobbies/', label: 'Hobbies' },
+const nav: { href: string; label: string; icon: IconName }[] = [
+  { href: '/', label: 'Home', icon: 'home' },
+  { href: '/projects/', label: 'Projects', icon: 'chart' },
+  { href: '/experience/', label: 'Experience', icon: 'briefcase' },
+  { href: '/skills/', label: 'Skills', icon: 'sparkles' },
+  { href: '/hobbies/', label: 'Hobbies', icon: 'heart' },
 ];
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
@@ -45,7 +47,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     <ul>
       {nav.map((item) => (
         <li>
-          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}><Icon name={item.icon} class="icon nav-icon" />{item.label}</a>
         </li>
       ))}
     </ul>
@@ -155,7 +157,18 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     color: var(--ink-2);
     font-size: 0.9rem;
     padding: 4px 0;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+  }
+  nav a :global(.nav-icon) {
+    width: 16px;
+    height: 16px;
+    color: var(--ink-3);
+  }
+  nav a[aria-current='page'] :global(.nav-icon),
+  nav a:hover :global(.nav-icon) {
+    color: var(--accent);
   }
   nav a:hover {
     color: var(--accent);
@@ -223,10 +236,14 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       gap: 2px;
     }
     nav a {
-      display: block;
+      display: flex;
       padding: 6px 0 6px 14px;
       position: relative;
       font-size: 0.95rem;
+    }
+    nav a :global(.nav-icon) {
+      width: 18px;
+      height: 18px;
     }
     nav a::before {
       content: '';

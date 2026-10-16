@@ -1,17 +1,22 @@
 ---
+import Icon from './Icon.astro';
+import type { IconName } from './Icon.astro';
+
 interface Props {
   id: string;
   title: string;
+  icon?: IconName;
   index?: string;
   moreHref?: string;
   moreLabel?: string;
 }
-const { id, title, index, moreHref, moreLabel = 'See all' } = Astro.props;
+const { id, title, icon, index, moreHref, moreLabel = 'See all' } = Astro.props;
 ---
 
 <section class="section" id={id} aria-labelledby={`${id}-title`}>
   <div class="section-head">
     {index && <span class="index" aria-hidden="true">{index}</span>}
+    {icon && <Icon name={icon} class="icon head-icon" />}
     <h2 id={`${id}-title`}>{title}</h2>
     {moreHref && <a class="more" href={moreHref}>{moreLabel}</a>}
   </div>

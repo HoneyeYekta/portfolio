@@ -1,0 +1,71 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from './Icon.astro';
+
+interface Props {
+  icon: IconName;
+  /** Colours the icon like the matching series on the career timeline. */
+  tone?: 'hr' | 'other' | 'training' | 'neutral';
+}
+const { icon, tone = 'neutral' } = Astro.props;
+---
+
+<div class:list={['rail-item', tone]}>
+  <div class="rail" aria-hidden="true">
+    <span class="badge"><Icon name={icon} /></span>
+  </div>
+  <div class="content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .rail-item {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 16px;
+    position: relative;
+    padding-bottom: 28px;
+  }
+  .rail-item:last-child {
+    padding-bottom: 0;
+  }
+  .rail {
+    position: relative;
+  }
+  .rail::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 42px;
+    bottom: -22px;
+    border-left: 1px solid var(--line);
+  }
+  .rail-item:last-child .rail::after {
+    display: none;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink-2);
+    font-size: 17px;
+  }
+  .hr .badge {
+    color: var(--chart-1);
+  }
+  .training .badge {
+    color: var(--chart-2);
+  }
+  .other .badge {
+    color: var(--chart-3);
+  }
+  .content {
+    padding-top: 6px;
+  }
+</style>

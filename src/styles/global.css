@@ -215,6 +215,9 @@ ul {
 }
 
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -257,6 +260,18 @@ ul {
   font-size: 0.8rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
+}
+
+.head-icon {
+  align-self: center;
+  width: 1.15em;
+  height: 1.15em;
+  color: var(--ink-3);
+}
+
+.eyebrow-icon {
+  width: 1.1em;
+  height: 1.1em;
 }
 
 .section-head .more {

@@ -1,0 +1,241 @@
+---
+/**
+ * In-page photo viewer for galleries. Any <a data-lb="group" href="full.jpg"><img alt="…"></a>
+ * on the page opens here instead of navigating; photos with the same group are browsed
+ * with previous/next. Opening pushes a history entry, so the browser back button (or
+ * Escape, the close button, or a tap outside) closes the viewer. Without JavaScript the
+ * links still open the full-size photo.
+ */
+import Icon from './Icon.astro';
+---
+
+<dialog class="lb" aria-label="Photo viewer">
+  <button class="lb-btn lb-close" type="button" aria-label="Close photo viewer"><Icon name="close" /></button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous photo"><Icon name="chevron-left" /></button>
+  <figure class="lb-figure">
+    <img class="lb-img" alt="" decoding="async" />
+    <figcaption class="lb-caption">
+      <span class="lb-text"></span>
+      <span class="lb-count nums"></span>
+    </figcaption>
+  </figure>
+  <button class="lb-btn lb-next" type="button" aria-label="Next photo"><Icon name="chevron-right" /></button>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('dialog.lb');
+  if (dialog) {
+    const img = dialog.querySelector<HTMLImageElement>('.lb-img')!;
+    const text = dialog.querySelector<HTMLElement>('.lb-text')!;
+    const count = dialog.querySelector<HTMLElement>('.lb-count')!;
+    const prevBtn = dialog.querySelector<HTMLButtonElement>('.lb-prev')!;
+    const nextBtn = dialog.querySelector<HTMLButtonElement>('.lb-next')!;
+
+    const groups = new Map<string, HTMLAnchorElement[]>();
+    document.querySelectorAll<HTMLAnchorElement>('a[data-lb]').forEach((a) => {
+      const g = a.dataset.lb!;
+      if (!groups.has(g)) groups.set(g, []);
+      groups.get(g)!.push(a);
+    });
+
+    let group = '';
+    let index = 0;
+    let pushed = false; // did we add a history entry for the open viewer?
+
+    const hash = () => `#${group}-${index + 1}`;
+    const state = () => ({ lb: group, i: index });
+
+    const render = () => {
+      const items = groups.get(group)!;
+      const a = items[index];
+      const thumb = a.querySelector('img');
+      img.src = a.href;
+      img.alt = thumb?.alt ?? '';
+      text.textContent = img.alt;
+      count.textContent = items.length > 1 ? `${index + 1} / ${items.length}` : '';
+      prevBtn.hidden = nextBtn.hidden = items.length < 2;
+    };
+
+    const open = (g: string, i: number, push: boolean) => {
+      group = g;
+      index = i;
+      render();
+      if (!dialog.open) dialog.showModal();
+      if (push) {
+        history.pushState(state(), '', hash());
+        pushed = true;
+      } else {
+        history.replaceState(state(), '', hash());
+      }
+    };
+
+    const step = (d: number) => {
+      const n = groups.get(group)!.length;
+      index = (index + d + n) % n;
+      render();
+      history.replaceState(state(), '', hash());
+    };
+
+    const close = () => {
+      if (pushed) {
+        history.back(); // popstate closes the dialog
+      } else {
+        dialog.close();
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    };
+
+    // Deep links: /hobbies/#illustration-3 opens the third illustration photo.
+    const fromHash = (): boolean => {
+      const m = location.hash.match(/^#(.+)-(\d+)$/);
+      if (!m || !groups.has(m[1])) return false;
+      const i = Number(m[2]) - 1;
+      if (i < 0 || i >= groups.get(m[1])!.length) return false;
+      open(m[1], i, false);
+      return true;
+    };
+
+    groups.forEach((items, g) =>
+      items.forEach((a, i) =>
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          open(g, i, true);
+        }),
+      ),
+    );
+    dialog.querySelector('.lb-close')!.addEventListener('click', close);
+    prevBtn.addEventListener('click', () => step(-1));
+    nextBtn.addEventListener('click', () => step(1));
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) close();
+    });
+    dialog.addEventListener('cancel', (e) => {
+      e.preventDefault(); // Escape: close through history so back/forward stay consistent
+      close();
+    });
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') step(1);
+      if (e.key === 'ArrowLeft') step(-1);
+    });
+
+    window.addEventListener('popstate', (e) => {
+      const s = e.state as { lb?: string; i?: number } | null;
+      if (s?.lb && groups.has(s.lb)) {
+        pushed = true;
+        open(s.lb, s.i ?? 0, false);
+      } else if (fromHash()) {
+        pushed = false;
+      } else if (dialog.open) {
+        pushed = false;
+        dialog.close();
+      }
+    });
+
+    if (fromHash()) pushed = false;
+  }
+</script>
+
+<style>
+  .lb {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    display: none;
+    place-items: center;
+  }
+  .lb[open] {
+    display: grid;
+  }
+  .lb::backdrop {
+    background: rgb(8 10 12 / 0.9);
+  }
+  .lb-figure {
+    margin: 0;
+    max-width: min(92vw, 1200px);
+    display: grid;
+    gap: 12px;
+    justify-items: center;
+  }
+  .lb-img {
+    max-width: 100%;
+    max-height: 78dvh;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgb(0 0 0 / 0.5);
+  }
+  .lb-caption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 14px;
+    font-size: 0.875rem;
+    color: rgb(255 255 255 / 0.8);
+    text-align: center;
+    max-width: 70ch;
+    line-height: 1.45;
+  }
+  .lb-count {
+    color: rgb(255 255 255 / 0.55);
+  }
+  .lb-btn {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    background: rgb(255 255 255 / 0.08);
+    color: #fff;
+    cursor: pointer;
+    font-size: 22px;
+    padding: 0;
+  }
+  .lb-btn:hover,
+  .lb-btn:focus-visible {
+    background: rgb(255 255 255 / 0.18);
+  }
+  .lb-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+  .lb-btn[hidden] {
+    display: none;
+  }
+  .lb-close {
+    top: 16px;
+    right: 16px;
+  }
+  .lb-prev,
+  .lb-next {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .lb-prev {
+    left: 12px;
+  }
+  .lb-next {
+    right: 12px;
+  }
+  @media (min-width: 900px) {
+    .lb-prev {
+      left: 28px;
+    }
+    .lb-next {
+      right: 28px;
+    }
+  }
+  :global(body:has(dialog.lb[open])) {
+    overflow: hidden;
+  }
+</style>
