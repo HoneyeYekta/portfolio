@@ -4,8 +4,8 @@
     "note": "Iranian online marketplace, similar to Marktplaats, with 35M+ monthly active users",
     "location": "Tehran, Iran",
     "roles": [
-      { "title": "Talent Acquisition Specialist", "start": "Mar 2021", "end": "Sep 2022" },
-      { "title": "Talent Acquisition Coordinator", "start": "Aug 2020", "end": "Mar 2021" }
+      { "title": "Talent Acquisition Specialist", "from": "2021-03", "to": "2022-09" },
+      { "title": "Talent Acquisition Coordinator", "from": "2020-08", "to": "2021-03" }
     ],
     "bullets": [
       "Analysed hiring data across departments, identifying recruitment bottlenecks and contributing to a 15% reduction in time to hire.",
@@ -18,7 +18,7 @@
     "note": "Iranian online travel platform, similar to Booking.com, with 12M+ users",
     "location": "Tehran, Iran",
     "roles": [
-      { "title": "Content Specialist", "start": "Jun 2019", "end": "Aug 2020" }
+      { "title": "Content Specialist", "from": "2019-06", "to": "2020-08" }
     ],
     "bullets": [
       "Coordinated work across cross-functional teams and improved documentation and workflows."

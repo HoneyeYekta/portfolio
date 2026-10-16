@@ -10,8 +10,12 @@ const projects = defineCollection({
     summary: z.string(),
     date: z.coerce.date(),
     tools: z.array(z.string()).default([]),
+    image: z.string().optional(),
+    imageAlt: z.string().default(''),
+    article: z.string().url().optional(),
+    articleLabel: z.string().default('Read the full article'),
     link: z.string().url().optional(),
-    linkLabel: z.string().default('Read the full post on LinkedIn'),
+    linkLabel: z.string().default('LinkedIn post'),
     status: z.enum(['published', 'upcoming']).default('published'),
   }),
 });

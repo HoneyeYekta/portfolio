@@ -1,9 +1,11 @@
 ---
+import { fmtRange } from '../lib/dates';
+
 interface Props {
   company: string;
   note?: string;
   location?: string;
-  roles: { title: string; start: string; end: string }[];
+  roles: { title: string; from: string; to?: string | null }[];
   bullets: string[];
 }
 const { company, note, location, roles, bullets } = Astro.props;
@@ -11,14 +13,14 @@ const { company, note, location, roles, bullets } = Astro.props;
 
 <article class="job">
   <header>
-    <h3>{company}<span class="muted small location"> · {location}</span></h3>
+    <h3>{company}{location && <span class="muted small location"> · {location}</span>}</h3>
     {note && <p class="small muted note">{note}</p>}
   </header>
   <ul class="roles">
     {roles.map((r) => (
       <li>
         <span class="role">{r.title}</span>
-        <span class="dates small muted nums">{r.start} – {r.end}</span>
+        <span class="dates small muted nums">{fmtRange(r.from, r.to)}</span>
       </li>
     ))}
   </ul>

@@ -4,7 +4,12 @@
     { "title": "B.Sc. Architectural Engineering", "school": "Shomal University" }
   ],
   "development": [
-    { "title": "HR Data Analytics & People Analytics", "period": "2022 – present", "note": "Professional training plus hands-on HR projects; currently extending into Power BI and Workday." }
+    {
+      "title": "HR Data Analytics & People Analytics",
+      "from": "2022-09",
+      "to": null,
+      "note": "Professional training plus hands-on HR projects; currently extending into Power BI and Workday."
+    }
   ],
   "languages": [
     { "name": "Persian", "level": "Native" },

@@ -6,43 +6,65 @@ interface Props {
   project: CollectionEntry<'projects'>;
 }
 const { project } = Astro.props;
-const { title, summary, date, tools, link, status } = project.data;
+const { title, summary, date, tools, link, article, image, status } = project.data;
 const upcoming = status === 'upcoming';
+const href = `/projects/${project.id}/`;
 const when = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' }).format(date);
+const external = article ?? link;
 ---
 
 <article class:list={['card', { upcoming }]}>
-  <div class="meta small muted">
-    <span class="nums">{when}</span>
-    {upcoming && <span class="tag">Coming soon</span>}
+  {image && !upcoming && (
+    <a class="thumb" href={href} tabindex="-1" aria-hidden="true">
+      <img src={image} alt="" loading="lazy" width="640" height="400" />
+    </a>
+  )}
+  <div class="body">
+    <div class="meta small muted">
+      <span class="nums">{when}</span>
+      {upcoming && <span class="tag">Coming soon</span>}
+    </div>
+    <h3>{upcoming ? title : <a href={href}>{title}</a>}</h3>
+    <p class="summary muted">{summary}</p>
+    {tools.length > 0 && (
+      <ul class="chips" aria-label="Tools">
+        {tools.map((t) => <li class="chip">{t}</li>)}
+      </ul>
+    )}
+    {!upcoming && external && (
+      <a class="more small" href={external} target="_blank" rel="noopener">Read on LinkedIn <ExternalIcon /></a>
+    )}
   </div>
-  <h3>
-    {upcoming ? title : <a href={`/projects/${project.id}/`}>{title}</a>}
-  </h3>
-  <p class="summary muted">{summary}</p>
-  {tools.length > 0 && (
-    <ul class="chips" aria-label="Tools">
-      {tools.map((t) => <li class="chip">{t}</li>)}
-    </ul>
-  )}
-  {!upcoming && link && (
-    <a class="more small" href={link} target="_blank" rel="noopener">LinkedIn post <ExternalIcon /></a>
-  )}
 </article>
 
 <style>
   .card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 18px;
+    overflow: hidden;
   }
   .card.upcoming {
     border-style: dashed;
     background: transparent;
+  }
+  .thumb {
+    display: block;
+    border-bottom: 1px solid var(--line);
+  }
+  .thumb img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 18px 18px;
+    flex: 1;
   }
   .meta {
     display: flex;
