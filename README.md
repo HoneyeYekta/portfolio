@@ -74,8 +74,9 @@ npx wrangler login
 npm run deploy
 ```
 
-After the first deploy, update `site` in `astro.config.mjs` with the real URL so canonical and
-social-preview links are correct. To attach a custom domain later, add a `routes` entry in
+The site currently lives at https://portfolio.1saeedsalehi.workers.dev. If the URL ever changes
+(for example a custom domain), update `site` in `astro.config.mjs` so canonical and social-preview
+links stay correct. To attach a custom domain later, add a `routes` entry in
 `wrangler.jsonc` (example in the file) and add the domain in the Cloudflare dashboard.
 
 ## Pushing from a shared machine
@@ -93,4 +94,3 @@ git push
 
 - [ ] Project pages contain placeholder "Full write-up coming soon" text. Replace with the real analysis.
 - [ ] The tagline and page intros are placeholders; adjust the wording to taste.
-- [ ] `site` in `astro.config.mjs` after the first Cloudflare deploy.
