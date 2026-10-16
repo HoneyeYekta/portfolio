@@ -1,35 +1,53 @@
 # Honeye Yekta — portfolio
 
 Personal site for Honeye Yekta (HR data & People Analytics). Built with [Astro](https://astro.build),
-hosted on Cloudflare Workers (static assets). No JavaScript is shipped to visitors; all content lives
-in small data files so it can be edited without touching the layout.
+hosted on Cloudflare Workers (static assets). All content lives in small data files so it can be
+edited without touching the layout.
+
+## Pages
+
+| URL | What it shows | Content comes from |
+|---|---|---|
+| `/` | Intro, career timeline, latest two projects | `src/data/profile.json`, `experience.json`, `education.json`, projects |
+| `/projects/` | All projects (upcoming first, then newest) | `src/content/projects/*.md` |
+| `/projects/<name>/` | One project: featured image, write-up, links | the matching `.md` file |
+| `/experience/` | Work history, education, professional development | `experience.json`, `education.json` |
+| `/skills/` | Skills, tools, languages | `skills.json`, `education.json` |
+
+The sidebar (photo, navigation, contact links, "Made with ♥ …") is the same on every page and reads
+from `profile.json`.
 
 ## Editing content (no coding needed)
 
 | What | Where |
 |---|---|
-| Name, headline, summary, location, links, availability line, highlight tiles | `src/data/profile.json` |
-| Work experience | `src/data/experience.json` |
+| Name, headline, tagline, summary, location, links, availability, "Made with" line | `src/data/profile.json` |
+| Work experience (dates as `YYYY-MM`, `"to": null` means present) | `src/data/experience.json` |
 | Skills and tools (with optional level like "Developing") | `src/data/skills.json` |
 | Education, professional development, languages | `src/data/education.json` |
 | Projects (one file each) | `src/content/projects/*.md` |
-| Photo | `public/images/honeye-480.jpg` and `honeye-960.jpg` (square, same photo at two sizes) |
+| Project images | `public/images/projects/` |
+| Portrait | `public/images/honeye-480.jpg` and `honeye-960.jpg` (square, same photo at two sizes) |
 
 Tips:
 
-- In `profile.json`, the highlight value `"{projects}"` is replaced automatically with the number of
-  published projects. Any other value is shown as written.
-- Set `"availability": ""` to hide the availability line in the Contact section.
+- The career timeline on the homepage is drawn from the role dates in `experience.json` and the
+  training dates in `education.json`. Fix a date there and the chart updates.
+- The email address is stored in two parts (`"user"` and `"domain"`) and only assembled in the
+  visitor's browser, so it never appears as `name@domain` in the HTML or in this repository. This keeps
+  it away from most address-harvesting bots.
 
 ### Adding a project
 
 1. Copy `src/content/projects/_template.md` to a new file, e.g. `src/content/projects/attrition-analysis.md`.
    The file name becomes the URL: `/projects/attrition-analysis/`.
-2. Fill in the fields at the top (title, summary, date, tools, LinkedIn link).
-3. Set `status: published` when it is ready, or leave `status: upcoming` to show a "Coming soon" card.
-4. Write the full story below the `---` line in Markdown. Images can go in `public/images/` and be
-   referenced as `![caption](/images/my-chart.png)`.
-5. Commit and push to `main`. Cloudflare rebuilds and publishes the site automatically.
+2. Fill in the fields at the top: title, summary, date, tools, the LinkedIn article and/or post links.
+3. Add a featured image to `public/images/projects/` (landscape works best, about 1280 px wide) and
+   set `image:` and `imageAlt:`.
+4. Set `status: published` when it is ready, or leave `status: upcoming` to show a "Coming soon" card.
+5. Write the full story below the `---` line in Markdown. Extra images can go in `public/images/`
+   and be referenced as `![caption](/images/my-chart.png)`.
+6. Commit and push to `main`. Cloudflare rebuilds and publishes the site automatically.
 
 ## Running locally
 
@@ -72,5 +90,5 @@ git push
 ## Content still to review
 
 - [ ] Project pages contain placeholder "Full write-up coming soon" text. Replace with the real analysis.
-- [ ] Highlight tiles in `profile.json` are taken from the CV; adjust wording or numbers as you like.
+- [ ] The tagline and page intros are placeholders; adjust the wording to taste.
 - [ ] `site` in `astro.config.mjs` after the first Cloudflare deploy.
