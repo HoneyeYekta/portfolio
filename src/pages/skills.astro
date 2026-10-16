@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import SkillChips from '../components/SkillChips.astro';
+import skills from '../data/skills.json';
+import education from '../data/education.json';
+---
+
+<Base title="Skills" description="HR analytics skills, tools and languages of Honeye Yekta.">
+  <header class="page-head">
+    <p class="eyebrow">Skills</p>
+    <h1>Skills & tools</h1>
+    <p class="lead muted">What I work with today, and what I am currently building up.</p>
+  </header>
+
+  <SkillChips label="Core skills" items={skills.core} />
+  <SkillChips label="Analytics & tools" items={skills.tools} />
+
+  <Section id="languages" title="Languages">
+    <ul class="plain">
+      {education.languages.map((l) => (
+        <li>
+          <span>{l.name}</span>
+          <span class="small muted">{l.level}</span>
+        </li>
+      ))}
+    </ul>
+  </Section>
+</Base>
+
+<style>
+  .plain {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .plain li {
+    display: grid;
+    gap: 1px;
+  }
+</style>

@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import ExternalIcon from '../../components/ExternalIcon.astro';
+import Icon from '../../components/Icon.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects', (p) => p.data.status === 'published');
@@ -9,14 +10,14 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, summary, date, tools, link, linkLabel } = project.data;
+const { title, summary, date, tools, image, imageAlt, article, articleLabel, link, linkLabel } = project.data;
 const { Content } = await render(project);
 const when = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(date);
 ---
 
-<Base title={title} description={summary}>
+<Base title={title} description={summary} image={image}>
   <article class="project">
-    <p class="small"><a href="/#projects">← All projects</a></p>
+    <p class="back small"><a href="/projects/"><Icon name="arrow-left" />All projects</a></p>
     <header>
       <p class="small muted nums">{when}</p>
       <h1>{title}</h1>
@@ -27,23 +28,38 @@ const when = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }
         </ul>
       )}
     </header>
+
+    {image && (
+      <figure class="cover">
+        <img src={image} alt={imageAlt} width="1280" height="720" fetchpriority="high" />
+      </figure>
+    )}
+
     <div class="prose">
       <Content />
     </div>
-    {link && (
-      <p class="cta">
-        <a class="btn btn-primary" href={link} target="_blank" rel="noopener">{linkLabel} <ExternalIcon /></a>
-      </p>
+
+    {(article || link) && (
+      <div class="actions cta">
+        {article && (
+          <a class="btn btn-primary" href={article} target="_blank" rel="noopener">{articleLabel} <ExternalIcon /></a>
+        )}
+        {link && (
+          <a class="btn" href={link} target="_blank" rel="noopener">{linkLabel} <ExternalIcon /></a>
+        )}
+      </div>
     )}
   </article>
 </Base>
 
 <style>
-  .project {
-    padding-block: 16px 40px;
+  .back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
   }
   header {
-    margin: 12px 0 8px;
+    margin: 12px 0 20px;
     display: grid;
     gap: 10px;
   }
@@ -53,6 +69,15 @@ const when = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }
   .lead {
     font-size: 1.05rem;
     max-width: 60ch;
+  }
+  .cover {
+    margin: 0 0 8px;
+  }
+  .cover img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
   }
   .cta {
     margin-top: 32px;

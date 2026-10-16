@@ -1,76 +1,47 @@
 ---
 import profile from '../data/profile.json';
 import ExternalIcon from './ExternalIcon.astro';
+import EmailLink from './EmailLink.astro';
 const { links } = profile;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <img
-    class="photo"
-    src={profile.photo.src}
-    srcset={profile.photo.srcset}
-    sizes="(min-width: 560px) 144px, 112px"
-    width="144"
-    height="144"
-    alt={profile.photo.alt}
-    fetchpriority="high"
-  />
-  <div class="intro">
-    <p class="small muted location">{profile.location}</p>
-    <h1 id="hero-title">{profile.name}</h1>
-    <p class="headline">{profile.headline}</p>
-    <p class="summary muted">{profile.summary}</p>
-    <div class="actions">
-      <a class="btn btn-primary" href={links.linkedin} target="_blank" rel="me noopener">LinkedIn <ExternalIcon /></a>
-      <a class="btn" href={links.github} target="_blank" rel="me noopener">GitHub <ExternalIcon /></a>
-      <a class="btn" href={`mailto:${links.email}`}>Email</a>
-    </div>
+  <p class="eyebrow">{profile.headline}</p>
+  <h1 id="hero-title">{profile.tagline}</h1>
+  <p class="summary muted">{profile.summary}</p>
+  <div class="actions">
+    <a class="btn btn-primary" href={links.linkedin} target="_blank" rel="me noopener">LinkedIn <ExternalIcon /></a>
+    <a class="btn" href={links.github} target="_blank" rel="me noopener">GitHub <ExternalIcon /></a>
+    <EmailLink class="btn" label="Email" />
   </div>
 </section>
 
 <style>
   .hero {
-    display: grid;
-    gap: 20px;
-    padding-block: 24px 40px;
+    position: relative;
+    isolation: isolate;
+    padding: 8px 0 36px;
   }
-  .photo {
-    width: 112px;
-    height: 112px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--line);
-  }
-  .location {
-    margin: 0 0 4px;
+  /* faint dot grid: a nod to graph paper */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -24px 0 0 -24px;
+    z-index: -1;
+    background-image: radial-gradient(var(--line) 1px, transparent 1.5px);
+    background-size: 18px 18px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 90% at 20% 0%, #000 30%, transparent 80%);
+    mask-image: radial-gradient(ellipse 70% 90% at 20% 0%, #000 30%, transparent 80%);
   }
   h1 {
-    font-size: clamp(1.75rem, 5vw, 2.25rem);
-  }
-  .headline {
-    margin: 6px 0 14px;
-    font-weight: 500;
-    color: var(--accent);
+    font-size: clamp(1.7rem, 4.5vw, 2.3rem);
+    max-width: 22ch;
   }
   .summary {
-    max-width: 56ch;
+    max-width: 58ch;
+    margin-top: 14px;
   }
   .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 18px;
-  }
-  @media (min-width: 560px) {
-    .hero {
-      grid-template-columns: 144px 1fr;
-      gap: 28px;
-      align-items: start;
-      padding-top: 32px;
-    }
-    .photo {
-      width: 144px;
-      height: 144px;
-    }
+    margin-top: 20px;
   }
 </style>

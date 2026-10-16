@@ -7,11 +7,14 @@
   --ink-2: #4b5560;
   --ink-3: #78828c;
   --line: #e3e6ea;
-  --accent: #0b6e8e;
-  --accent-soft: #e4f1f6;
+  --accent: #1f6cc9;
+  --accent-soft: #e6f0fb;
+  --chart-1: #2a78d6;
+  --chart-2: #eb6834;
   --radius: 10px;
   --maxw: 760px;
   --gutter: 16px;
+  --sidebar: 280px;
   --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -23,8 +26,10 @@
     --ink-2: #aab3bc;
     --ink-3: #7f8993;
     --line: #262c33;
-    --accent: #5fc0dc;
-    --accent-soft: #11303a;
+    --accent: #3987e5;
+    --accent-soft: #12263d;
+    --chart-1: #3987e5;
+    --chart-2: #d95926;
   }
 }
 
@@ -95,10 +100,29 @@ ul {
   padding-left: 1.2em;
 }
 
+/* ---- Shell: sidebar + content --------------------------------------- */
+.shell {
+  min-height: 100dvh;
+}
+
 .container {
   max-width: var(--maxw);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding: 24px var(--gutter) 40px;
+}
+
+@media (min-width: 900px) {
+  .shell {
+    display: flex;
+    align-items: flex-start;
+  }
+  .content {
+    flex: 1;
+    min-width: 0;
+  }
+  .container {
+    padding: 48px 40px 64px;
+  }
 }
 
 .skip {
@@ -109,13 +133,33 @@ ul {
   padding: 8px 12px;
   border: 1px solid var(--line);
   border-radius: 6px;
+  z-index: 10;
 }
 
 .skip:focus {
   left: 8px;
-  z-index: 10;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.only-mobile {
+  display: initial;
+}
+
+@media (min-width: 900px) {
+  .only-mobile {
+    display: none !important;
+  }
+}
+
+/* ---- Text utilities -------------------------------------------------- */
 .muted {
   color: var(--ink-2);
 }
@@ -128,17 +172,38 @@ ul {
   font-variant-numeric: tabular-nums;
 }
 
-/* ---- Sections ------------------------------------------------------- */
+.eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+/* ---- Page head & sections ------------------------------------------- */
+.page-head {
+  margin-bottom: 28px;
+}
+
+.page-head h1 {
+  font-size: clamp(1.6rem, 4.5vw, 2rem);
+}
+
+.page-head .lead {
+  margin-top: 8px;
+  max-width: 60ch;
+}
+
 .section {
-  padding-block: 40px;
-  border-top: 1px solid var(--line);
+  padding-block: 36px 0;
 }
 
 .section-head {
   display: flex;
   align-items: baseline;
   gap: 0.75em;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .section-head h2 {
@@ -150,6 +215,11 @@ ul {
   font-size: 0.8rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
+}
+
+.section-head .more {
+  margin-left: auto;
+  font-size: 0.875rem;
 }
 
 /* ---- Chips & buttons ------------------------------------------------- */
@@ -214,6 +284,19 @@ ul {
 .btn-primary:focus-visible {
   color: var(--bg);
   opacity: 0.9;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Icons inside components live outside scoped styles, so size them here. */
+.icon {
+  width: 1em;
+  height: 1em;
+  flex: none;
 }
 
 .ext-icon {

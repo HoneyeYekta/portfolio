@@ -1,16 +1,19 @@
 ---
 interface Props {
   id: string;
-  index: string;
   title: string;
+  index?: string;
+  moreHref?: string;
+  moreLabel?: string;
 }
-const { id, index, title } = Astro.props;
+const { id, title, index, moreHref, moreLabel = 'See all' } = Astro.props;
 ---
 
 <section class="section" id={id} aria-labelledby={`${id}-title`}>
   <div class="section-head">
-    <span class="index" aria-hidden="true">{index}</span>
+    {index && <span class="index" aria-hidden="true">{index}</span>}
     <h2 id={`${id}-title`}>{title}</h2>
+    {moreHref && <a class="more" href={moreHref}>{moreLabel}</a>}
   </div>
   <slot />
 </section>

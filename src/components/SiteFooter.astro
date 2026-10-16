@@ -1,0 +1,25 @@
+---
+import profile from '../data/profile.json';
+import ContactLinks from './ContactLinks.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer container">
+  <ContactLinks class="only-mobile" />
+  <p class="small muted">
+    © {year} {profile.name}
+    <span class="only-mobile"> · {profile.madeWith}</span>
+  </p>
+</footer>
+
+<style>
+  .site-footer {
+    display: grid;
+    gap: 14px;
+    padding-top: 0;
+    padding-bottom: 32px;
+  }
+  .site-footer p {
+    margin: 0;
+  }
+</style>

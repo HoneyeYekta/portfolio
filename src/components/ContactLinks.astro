@@ -1,0 +1,58 @@
+---
+import profile from '../data/profile.json';
+import Icon from './Icon.astro';
+import EmailLink from './EmailLink.astro';
+
+interface Props {
+  heading?: string;
+  class?: string;
+}
+const { heading, class: cls } = Astro.props;
+---
+
+<div class:list={['contact', cls]}>
+  {heading && <p class="contact-heading small muted">{heading}</p>}
+  <ul class="contact-list">
+    <li>
+      <a href={profile.links.linkedin} target="_blank" rel="me noopener"><Icon name="linkedin" />LinkedIn</a>
+    </li>
+    <li>
+      <a href={profile.links.github} target="_blank" rel="me noopener"><Icon name="github" />GitHub</a>
+    </li>
+    <li>
+      <EmailLink><Icon name="mail" /></EmailLink>
+    </li>
+  </ul>
+</div>
+
+<style>
+  .contact-heading {
+    margin: 0 0 6px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+  }
+  .contact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+  .contact-list :global(a) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--ink-2);
+    font-size: 0.9rem;
+  }
+  .contact-list :global(a:hover) {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .contact.stacked .contact-list {
+    flex-direction: column;
+    gap: 8px;
+  }
+</style>

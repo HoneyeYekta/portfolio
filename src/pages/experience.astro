@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import ExperienceItem from '../components/ExperienceItem.astro';
+import experience from '../data/experience.json';
+import education from '../data/education.json';
+import { fmtRange } from '../lib/dates';
+---
+
+<Base title="Experience" description="Work experience, education and professional development of Honeye Yekta.">
+  <header class="page-head">
+    <p class="eyebrow">Experience</p>
+    <h1>Where I have worked</h1>
+    <p class="lead muted">Talent acquisition roles where I started using data to understand and improve the hiring process.</p>
+  </header>
+
+  {experience.map((job) => <ExperienceItem {...job} />)}
+
+  <Section id="education" title="Education">
+    <ul class="plain">
+      {education.degrees.map((d) => (
+        <li>
+          <span>{d.title}</span>
+          <span class="small muted">{d.school}</span>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section id="development" title="Professional development">
+    <ul class="plain">
+      {education.development.map((d) => (
+        <li>
+          <span>{d.title} <span class="small muted nums">· {fmtRange(d.from, d.to)}</span></span>
+          {d.note && <span class="small muted">{d.note}</span>}
+        </li>
+      ))}
+    </ul>
+  </Section>
+</Base>
+
+<style>
+  .plain {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .plain li {
+    display: grid;
+    gap: 1px;
+  }
+</style>

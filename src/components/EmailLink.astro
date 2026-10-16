@@ -1,0 +1,32 @@
+---
+/**
+ * Email link that is assembled in the browser so the address never appears
+ * as plain "name@domain" text in the HTML or in this repository.
+ * Without JavaScript the link falls back to the LinkedIn profile.
+ */
+import profile from '../data/profile.json';
+
+interface Props {
+  class?: string;
+  label?: string;
+  /** Replace the label with the real address once JavaScript has run. */
+  reveal?: boolean;
+}
+const { class: cls, label = 'Email', reveal = false } = Astro.props;
+const { user, domain } = profile.links.email;
+---
+
+<a class={cls} href={profile.links.linkedin} data-u={user} data-d={domain} data-reveal={reveal ? '1' : undefined}>
+  <slot />{label}
+</a>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('a[data-u][data-d]').forEach((a) => {
+    const address = `${a.dataset.u}@${a.dataset.d}`;
+    a.href = `mailto:${address}`;
+    if (a.dataset.reveal) {
+      const text = Array.from(a.childNodes).find((n) => n.nodeType === Node.TEXT_NODE);
+      if (text) text.textContent = address;
+    }
+  });
+</script>

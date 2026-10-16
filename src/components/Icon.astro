@@ -1,0 +1,17 @@
+---
+interface Props {
+  name: 'linkedin' | 'github' | 'mail' | 'arrow-left';
+  class?: string;
+}
+const { name, class: cls = 'icon' } = Astro.props;
+const paths: Record<Props['name'], string> = {
+  linkedin: 'M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18',
+  github: 'm8 6-5 6 5 6M16 6l5 6-5 6M14 4l-4 16',
+  mail: 'M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm0 1 9 6 9-6',
+  'arrow-left': 'M19 12H5m6-6-6 6 6 6',
+};
+---
+
+<svg class={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d={paths[name]} />
+</svg>
