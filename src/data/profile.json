@@ -1,0 +1,23 @@
+{
+  "name": "Honeye Yekta",
+  "headline": "HR professional · HR data & People Analytics",
+  "location": "Utrecht, Netherlands",
+  "summary": "HR professional with experience in recruitment analytics, reporting, KPI tracking and process improvement. I enjoy working with data to uncover patterns, improve processes and turn findings into practical actions.",
+  "availability": "Open to People Analytics and HR data roles in the Netherlands. No visa sponsorship required.",
+  "photo": {
+    "src": "/images/honeye-480.jpg",
+    "srcset": "/images/honeye-480.jpg 480w, /images/honeye-960.jpg 960w",
+    "alt": "Portrait of Honeye Yekta"
+  },
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/honeye-yekta/",
+    "github": "https://github.com/HoneyeYekta",
+    "email": "honeyeyekta@gmail.com"
+  },
+  "highlights": [
+    { "value": "15%", "label": "Reduction in time to hire" },
+    { "value": "{projects}", "label": "People Analytics projects published" },
+    { "value": "2+", "label": "Years in talent acquisition" },
+    { "value": "35M+", "label": "Monthly users at the marketplace I hired for" }
+  ]
+}

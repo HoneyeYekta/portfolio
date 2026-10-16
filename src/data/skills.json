@@ -1,0 +1,19 @@
+{
+  "core": [
+    "HR Analytics",
+    "People Analytics",
+    "Recruitment Analytics",
+    "HR Reporting",
+    "Data Quality",
+    "KPI Tracking",
+    "Process Improvement",
+    "Stakeholder Management"
+  ],
+  "tools": [
+    { "name": "Microsoft Excel" },
+    { "name": "Google Sheets" },
+    { "name": "Power BI", "level": "Developing" },
+    { "name": "ATS / HR systems" },
+    { "name": "Workday", "level": "Introductory" }
+  ]
+}

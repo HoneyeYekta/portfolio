@@ -1,0 +1,27 @@
+[
+  {
+    "company": "Divar",
+    "note": "Iranian online marketplace, similar to Marktplaats, with 35M+ monthly active users",
+    "location": "Tehran, Iran",
+    "roles": [
+      { "title": "Talent Acquisition Specialist", "start": "Mar 2021", "end": "Sep 2022" },
+      { "title": "Talent Acquisition Coordinator", "start": "Aug 2020", "end": "Mar 2021" }
+    ],
+    "bullets": [
+      "Analysed hiring data across departments, identifying recruitment bottlenecks and contributing to a 15% reduction in time to hire.",
+      "Built recruitment reports and tracked HR KPIs in Excel and Google Sheets; translated findings into process improvements such as recruitment SLAs.",
+      "Maintained recruitment data in the ATS and tested an internally developed HR system, improving data quality."
+    ]
+  },
+  {
+    "company": "Alibaba Travels",
+    "note": "Iranian online travel platform, similar to Booking.com, with 12M+ users",
+    "location": "Tehran, Iran",
+    "roles": [
+      { "title": "Content Specialist", "start": "Jun 2019", "end": "Aug 2020" }
+    ],
+    "bullets": [
+      "Coordinated work across cross-functional teams and improved documentation and workflows."
+    ]
+  }
+]
