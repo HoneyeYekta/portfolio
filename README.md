@@ -49,7 +49,7 @@ Tips:
 4. Set `status: published` when it is ready, or leave `status: upcoming` to show a "Coming soon" card.
 5. Write the full story below the `---` line in Markdown. Extra images can go in `public/images/`
    and be referenced as `![caption](/images/my-chart.png)`.
-6. Commit and push to `main`. Cloudflare rebuilds and publishes the site automatically.
+6. Commit and push to `main`. The deploy workflow rebuilds and publishes the site automatically.
 
 ## Running locally
 
@@ -64,8 +64,16 @@ npm run preview    # serve dist/ locally
 
 ## Deployment
 
-The site is deployed by Cloudflare's Git integration: every push to `main` runs `npm run build` and
-then `npx wrangler deploy`, which uploads `dist/` as static assets (see `wrangler.jsonc`).
+A GitHub Actions workflow (`.github/workflows/deploy.yml`) runs on every push to `main`: it installs
+dependencies, runs `npm run build` and then `wrangler deploy`, which uploads `dist/` to Cloudflare as
+static assets (see `wrangler.jsonc`). Progress and logs are under the repository's **Actions** tab,
+where the workflow can also be started by hand.
+
+The workflow needs two repository secrets (Settings → Secrets and variables → Actions):
+
+- `CLOUDFLARE_ACCOUNT_ID`: the Cloudflare account that owns the worker.
+- `CLOUDFLARE_API_TOKEN`: an API token created in the Cloudflare dashboard (My Profile → API Tokens →
+  Create Token → "Edit Cloudflare Workers" template).
 
 Manual deploy from a machine with Cloudflare access:
 
