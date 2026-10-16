@@ -5,7 +5,7 @@
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page"
-  }
-  // To attach a custom domain later, add e.g.:
-  // "routes": [{ "pattern": "honeyeyekta.com", "custom_domain": true }]
+  },
+  // Custom domain (DNS zone on the same Cloudflare account). The *.workers.dev URL stays available too.
+  "routes": [{ "pattern": "honeye.me", "custom_domain": true }]
 }

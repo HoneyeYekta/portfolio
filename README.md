@@ -1,6 +1,6 @@
 # Honeye Yekta — portfolio
 
-Personal site for Honeye Yekta (HR data & People Analytics). Built with [Astro](https://astro.build),
+Personal site for Honeye Yekta (HR data & People Analytics), live at **https://honeye.me**. Built with [Astro](https://astro.build),
 hosted on Cloudflare Workers (static assets). All content lives in small data files so it can be
 edited without touching the layout.
 
@@ -82,10 +82,10 @@ npx wrangler login
 npm run deploy
 ```
 
-The site currently lives at https://portfolio.1saeedsalehi.workers.dev. If the URL ever changes
-(for example a custom domain), update `site` in `astro.config.mjs` so canonical and social-preview
-links stay correct. To attach a custom domain later, add a `routes` entry in
-`wrangler.jsonc` (example in the file) and add the domain in the Cloudflare dashboard.
+The site is served at https://honeye.me, a custom domain declared under `routes` in `wrangler.jsonc`
+(the DNS zone is on the same Cloudflare account). The worker's `*.workers.dev` address keeps working
+as a secondary URL. If the public URL ever changes, update `site` in `astro.config.mjs` so canonical
+and social-preview links stay correct.
 
 ## Pushing from a shared machine
 
