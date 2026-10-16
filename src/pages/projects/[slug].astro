@@ -1,0 +1,60 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ExternalIcon from '../../components/ExternalIcon.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', (p) => p.data.status === 'published');
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { title, summary, date, tools, link, linkLabel } = project.data;
+const { Content } = await render(project);
+const when = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(date);
+---
+
+<Base title={title} description={summary}>
+  <article class="project">
+    <p class="small"><a href="/#projects">← All projects</a></p>
+    <header>
+      <p class="small muted nums">{when}</p>
+      <h1>{title}</h1>
+      <p class="lead muted">{summary}</p>
+      {tools.length > 0 && (
+        <ul class="chips" aria-label="Tools">
+          {tools.map((t) => <li class="chip">{t}</li>)}
+        </ul>
+      )}
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    {link && (
+      <p class="cta">
+        <a class="btn btn-primary" href={link} target="_blank" rel="noopener">{linkLabel} <ExternalIcon /></a>
+      </p>
+    )}
+  </article>
+</Base>
+
+<style>
+  .project {
+    padding-block: 16px 40px;
+  }
+  header {
+    margin: 12px 0 8px;
+    display: grid;
+    gap: 10px;
+  }
+  h1 {
+    font-size: clamp(1.5rem, 4.5vw, 2rem);
+  }
+  .lead {
+    font-size: 1.05rem;
+    max-width: 60ch;
+  }
+  .cta {
+    margin-top: 32px;
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ExternalIcon from './ExternalIcon.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const { title, summary, date, tools, link, status } = project.data;
+const upcoming = status === 'upcoming';
+const when = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' }).format(date);
+---
+
+<article class:list={['card', { upcoming }]}>
+  <div class="meta small muted">
+    <span class="nums">{when}</span>
+    {upcoming && <span class="tag">Coming soon</span>}
+  </div>
+  <h3>
+    {upcoming ? title : <a href={`/projects/${project.id}/`}>{title}</a>}
+  </h3>
+  <p class="summary muted">{summary}</p>
+  {tools.length > 0 && (
+    <ul class="chips" aria-label="Tools">
+      {tools.map((t) => <li class="chip">{t}</li>)}
+    </ul>
+  )}
+  {!upcoming && link && (
+    <a class="more small" href={link} target="_blank" rel="noopener">LinkedIn post <ExternalIcon /></a>
+  )}
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .card.upcoming {
+    border-style: dashed;
+    background: transparent;
+  }
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tag {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-size: 0.75rem;
+  }
+  h3 {
+    font-size: 1.05rem;
+  }
+  h3 a {
+    color: var(--ink);
+  }
+  h3 a:hover {
+    color: var(--accent);
+  }
+  .summary {
+    font-size: 0.95rem;
+  }
+  .more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    margin-top: auto;
+  }
+</style>

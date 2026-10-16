@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import StatTiles from '../components/StatTiles.astro';
+import Section from '../components/Section.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ExperienceItem from '../components/ExperienceItem.astro';
+import SkillChips from '../components/SkillChips.astro';
+import ExternalIcon from '../components/ExternalIcon.astro';
+import profile from '../data/profile.json';
+import experience from '../data/experience.json';
+import skills from '../data/skills.json';
+import education from '../data/education.json';
+
+const all = await getCollection('projects');
+const projects = all.sort((a, b) => {
+  if (a.data.status !== b.data.status) return a.data.status === 'upcoming' ? -1 : 1;
+  return b.data.date.getTime() - a.data.date.getTime();
+});
+const publishedCount = all.filter((p) => p.data.status === 'published').length;
+
+// "{projects}" in profile.json is replaced with the live number of published projects.
+const highlights = profile.highlights.map((h) => ({
+  ...h,
+  value: h.value === '{projects}' ? String(publishedCount) : h.value,
+}));
+---
+
+<Base>
+  <Hero />
+
+  <StatTiles items={highlights} />
+
+  <Section id="projects" index="01" title="Projects">
+    <div class="grid">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </Section>
+
+  <Section id="experience" index="02" title="Experience">
+    {experience.map((job) => <ExperienceItem {...job} />)}
+  </Section>
+
+  <Section id="skills" index="03" title="Skills & tools">
+    <SkillChips label="Core skills" items={skills.core} />
+    <SkillChips label="Analytics & tools" items={skills.tools} />
+  </Section>
+
+  <Section id="education" index="04" title="Education & languages">
+    <div class="two-col">
+      <div>
+        <h3 class="small muted">Education</h3>
+        <ul class="plain">
+          {education.degrees.map((d) => (
+            <li>
+              <span>{d.title}</span>
+              <span class="small muted">{d.school}</span>
+            </li>
+          ))}
+        </ul>
+        <h3 class="small muted">Professional development</h3>
+        <ul class="plain">
+          {education.development.map((d) => (
+            <li>
+              <span>{d.title} <span class="small muted nums">· {d.period}</span></span>
+              <span class="small muted">{d.note}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="small muted">Languages</h3>
+        <ul class="plain">
+          {education.languages.map((l) => (
+            <li>
+              <span>{l.name}</span>
+              <span class="small muted">{l.level}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="contact" index="05" title="Contact">
+    {profile.availability && <p class="muted">{profile.availability}</p>}
+    <div class="actions">
+      <a class="btn btn-primary" href={`mailto:${profile.links.email}`}>{profile.links.email}</a>
+      <a class="btn" href={profile.links.linkedin} target="_blank" rel="me noopener">LinkedIn <ExternalIcon /></a>
+      <a class="btn" href={profile.links.github} target="_blank" rel="me noopener">GitHub <ExternalIcon /></a>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    gap: 14px;
+  }
+  @media (min-width: 640px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .two-col {
+    display: grid;
+    gap: 24px;
+  }
+  @media (min-width: 560px) {
+    .two-col {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+  h3 {
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .plain {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: grid;
+    gap: 10px;
+  }
+  .plain li {
+    display: grid;
+    gap: 1px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+</style>

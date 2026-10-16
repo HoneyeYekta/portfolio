@@ -1,0 +1,67 @@
+---
+interface Props {
+  company: string;
+  note?: string;
+  location?: string;
+  roles: { title: string; start: string; end: string }[];
+  bullets: string[];
+}
+const { company, note, location, roles, bullets } = Astro.props;
+---
+
+<article class="job">
+  <header>
+    <h3>{company}<span class="muted small location"> · {location}</span></h3>
+    {note && <p class="small muted note">{note}</p>}
+  </header>
+  <ul class="roles">
+    {roles.map((r) => (
+      <li>
+        <span class="role">{r.title}</span>
+        <span class="dates small muted nums">{r.start} – {r.end}</span>
+      </li>
+    ))}
+  </ul>
+  <ul class="bullets">
+    {bullets.map((b) => <li>{b}</li>)}
+  </ul>
+</article>
+
+<style>
+  .job + .job {
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px dashed var(--line);
+  }
+  h3 {
+    font-size: 1.05rem;
+  }
+  .location {
+    font-weight: 400;
+  }
+  .note {
+    margin: 2px 0 0;
+  }
+  .roles {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+    display: grid;
+    gap: 4px;
+  }
+  .roles li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 16px;
+  }
+  .role {
+    font-weight: 500;
+  }
+  .bullets {
+    color: var(--ink-2);
+    font-size: 0.95rem;
+    display: grid;
+    gap: 6px;
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+import profile from '../data/profile.json';
+import ExternalIcon from './ExternalIcon.astro';
+const { links } = profile;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <img
+    class="photo"
+    src={profile.photo.src}
+    srcset={profile.photo.srcset}
+    sizes="(min-width: 560px) 144px, 112px"
+    width="144"
+    height="144"
+    alt={profile.photo.alt}
+    fetchpriority="high"
+  />
+  <div class="intro">
+    <p class="small muted location">{profile.location}</p>
+    <h1 id="hero-title">{profile.name}</h1>
+    <p class="headline">{profile.headline}</p>
+    <p class="summary muted">{profile.summary}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href={links.linkedin} target="_blank" rel="me noopener">LinkedIn <ExternalIcon /></a>
+      <a class="btn" href={links.github} target="_blank" rel="me noopener">GitHub <ExternalIcon /></a>
+      <a class="btn" href={`mailto:${links.email}`}>Email</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: 20px;
+    padding-block: 24px 40px;
+  }
+  .photo {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+  .location {
+    margin: 0 0 4px;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+  }
+  .headline {
+    margin: 6px 0 14px;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .summary {
+    max-width: 56ch;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  @media (min-width: 560px) {
+    .hero {
+      grid-template-columns: 144px 1fr;
+      gap: 28px;
+      align-items: start;
+      padding-top: 32px;
+    }
+    .photo {
+      width: 144px;
+      height: 144px;
+    }
+  }
+</style>

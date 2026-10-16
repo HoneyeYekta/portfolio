@@ -1,0 +1,33 @@
+---
+interface Props {
+  label: string;
+  items: (string | { name: string; level?: string })[];
+}
+const { label, items } = Astro.props;
+---
+
+<div class="group">
+  <h3 class="small muted">{label}</h3>
+  <ul class="chips" aria-label={label}>
+    {items.map((item) =>
+      typeof item === 'string' ? (
+        <li class="chip">{item}</li>
+      ) : (
+        <li class="chip">
+          {item.name}
+          {item.level && <span class="level">{item.level}</span>}
+        </li>
+      ),
+    )}
+  </ul>
+</div>
+
+<style>
+  .group + .group {
+    margin-top: 20px;
+  }
+  h3 {
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+</style>
