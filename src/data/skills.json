@@ -13,7 +13,8 @@
     { "name": "Microsoft Excel" },
     { "name": "Google Sheets" },
     { "name": "Power BI", "level": "Developing" },
-    { "name": "ATS / HR systems" },
-    { "name": "Workday", "level": "Introductory" }
+    { "name": "SQL", "level": "Developing" },
+    { "name": "ATS & HR systems" },
+    { "name": "Workday", "level": "Developing" }
   ]
 }

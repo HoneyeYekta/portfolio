@@ -5,3 +5,5 @@
 Personal site for Honeye Yekta (HR data & People Analytics), live at **https://honeye.me**. Built with [Astro](https://astro.build),
 hosted on Cloudflare Workers.
 
+
+How to edit content, add projects or photos, and how deployment works: see [docs/editing-guide.md](docs/editing-guide.md).

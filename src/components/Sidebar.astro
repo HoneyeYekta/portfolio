@@ -7,6 +7,7 @@ const nav = [
   { href: '/projects/', label: 'Projects' },
   { href: '/experience/', label: 'Experience' },
   { href: '/skills/', label: 'Skills' },
+  { href: '/hobbies/', label: 'Hobbies' },
 ];
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));

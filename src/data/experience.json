@@ -1,5 +1,6 @@
 [
   {
+    "kind": "hr",
     "company": "Divar",
     "note": "Iranian online marketplace, similar to Marktplaats, with 35M+ monthly active users",
     "location": "Tehran, Iran",
@@ -7,13 +8,18 @@
       { "title": "Talent Acquisition Specialist", "from": "2021-03", "to": "2022-09" },
       { "title": "Talent Acquisition Coordinator", "from": "2020-08", "to": "2021-03" }
     ],
+    "intro": "Promoted after taking on greater ownership of recruitment analytics and process improvement.",
     "bullets": [
       "Analysed hiring data across departments, identifying recruitment bottlenecks and contributing to a 15% reduction in time to hire.",
-      "Built recruitment reports and tracked HR KPIs in Excel and Google Sheets; translated findings into process improvements such as recruitment SLAs.",
-      "Maintained recruitment data in the ATS and tested an internally developed HR system, improving data quality."
+      "Built recruitment reports and tracked HR KPIs using Excel and Google Sheets to monitor performance and identify trends.",
+      "Translated data findings into practical process improvements, including recruitment SLAs.",
+      "Worked with hiring managers and stakeholders to turn process insights into actionable changes.",
+      "Maintained recruitment data in the ATS and tested an internally developed HR system, identifying workflow issues and improving data quality.",
+      "Designed and implemented an automated candidate satisfaction survey, using structured feedback data to identify trends and opportunities to improve the interview process."
     ]
   },
   {
+    "kind": "hr",
     "company": "Alibaba Travels",
     "note": "Iranian online travel platform, similar to Booking.com, with 12M+ users",
     "location": "Tehran, Iran",
@@ -21,7 +27,46 @@
       { "title": "Content Specialist", "from": "2019-06", "to": "2020-08" }
     ],
     "bullets": [
-      "Coordinated work across cross-functional teams and improved documentation and workflows."
+      "Coordinated work across cross-functional teams and managed multiple priorities.",
+      "Improved documentation and workflows to support operational efficiency."
+    ]
+  },
+  {
+    "kind": "training",
+    "company": "Professional development",
+    "roles": [
+      { "title": "Career transition to People Analytics", "from": "2026", "to": null }
+    ],
+    "bullets": [
+      "Completed online coursework in HR Data Analytics and applied the learning to practical People Analytics projects.",
+      "Currently developing skills in SQL, Power BI and Workday through online training and independent practice.",
+      "Building on previous recruitment experience to transition into HR Data Analytics, combining HR knowledge with data-driven problem-solving."
+    ]
+  },
+  {
+    "kind": "other",
+    "company": "Linkiwi",
+    "note": "Startup team project",
+    "roles": [
+      { "title": "Frontend Developer", "from": "2024", "to": "2026" }
+    ],
+    "bullets": [
+      "Completed approximately 10 months of focused frontend development learning, progressing from web fundamentals to React Native and TypeScript.",
+      "Collaborated with a small team to develop Linkiwi, taking responsibility for frontend development.",
+      "Contributed to building a functional product prototype made available for testing through Apple TestFlight."
+    ]
+  },
+  {
+    "kind": "other",
+    "company": "The_HanZz Studio",
+    "note": "Independent illustration studio with an Etsy shop",
+    "location": "Netherlands",
+    "roles": [
+      { "title": "Independent Illustrator & Shop Owner", "from": "2023", "to": "2024" }
+    ],
+    "bullets": [
+      "Founded an independent illustration studio and launched an Etsy shop to sell original illustration prints.",
+      "Created original illustrations and prepared artwork for online sale."
     ]
   }
 ]

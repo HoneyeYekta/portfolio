@@ -11,6 +11,7 @@
   --accent-soft: #e6f0fb;
   --chart-1: #2a78d6;
   --chart-2: #eb6834;
+  --chart-3: #0f9d9d;
   --radius: 10px;
   --maxw: 760px;
   --gutter: 16px;
@@ -33,6 +34,7 @@
     --accent-soft: #12263d;
     --chart-1: #3987e5;
     --chart-2: #d95926;
+  --chart-3: #17a08c;
   }
 }
 
@@ -48,6 +50,7 @@
   --accent-soft: #12263d;
   --chart-1: #3987e5;
   --chart-2: #d95926;
+  --chart-3: #17a08c;
 }
 
 /* Theme toggle icon: show the mode you would switch to. */

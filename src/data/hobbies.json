@@ -1,0 +1,121 @@
+[
+  {
+    "slug": "photo-journaling",
+    "title": "Photo journaling",
+    "description": "Styling and photographing small everyday moments, mostly around food and the seasons, and keeping them as a visual diary.",
+    "images": [
+      {
+        "src": "/images/hobbies/photo-journaling/01.jpg",
+        "thumb": "/images/hobbies/photo-journaling/01-thumb.jpg",
+        "alt": "A red mug of hot chocolate topped with a marshmallow snowman, next to meringue cookies and a gift wrapped in kraft paper on an orange knitted blanket.",
+        "w": 800,
+        "h": 533
+      },
+      {
+        "src": "/images/hobbies/photo-journaling/02.jpg",
+        "thumb": "/images/hobbies/photo-journaling/02-thumb.jpg",
+        "alt": "Glaze being poured over a braided cinnamon bun, with a bowl of cinnamon sticks and a rolling pin on a white table.",
+        "w": 800,
+        "h": 533
+      }
+    ]
+  },
+  {
+    "slug": "illustration",
+    "title": "Playful illustration & collection design",
+    "description": "Cheerful hand-drawn characters with a pun, developed into small print collections under The_HanZz Studio.",
+    "images": [
+      {
+        "src": "/images/hobbies/illustration/01.jpg",
+        "thumb": "/images/hobbies/illustration/01-thumb.jpg",
+        "alt": "Four illustrated prints laid out on a desk: Coffee because adulting is hard, Coffee and friends make the perfect blend, Espresso yourself, and Tea is like a hug in a mug.",
+        "w": 800,
+        "h": 800
+      },
+      {
+        "src": "/images/hobbies/illustration/02.jpg",
+        "thumb": "/images/hobbies/illustration/02-thumb.jpg",
+        "alt": "Framed yellow print of a smiling character holding a red mug, captioned Coffee, because adulting is hard.",
+        "w": 533,
+        "h": 800
+      },
+      {
+        "src": "/images/hobbies/illustration/03.jpg",
+        "thumb": "/images/hobbies/illustration/03-thumb.jpg",
+        "alt": "Framed pink print of a character relaxing in a blue cup, captioned Tea is like a hug in a mug.",
+        "w": 800,
+        "h": 533
+      },
+      {
+        "src": "/images/hobbies/illustration/04.jpg",
+        "thumb": "/images/hobbies/illustration/04-thumb.jpg",
+        "alt": "Framed purple print of a yellow polka-dot mug and a character offering a flower, captioned Caffeine and kindness go hand in hand.",
+        "w": 800,
+        "h": 534
+      },
+      {
+        "src": "/images/hobbies/illustration/05.jpg",
+        "thumb": "/images/hobbies/illustration/05-thumb.jpg",
+        "alt": "Framed pink print of two characters in a green teapot, captioned Coffee and friends make the perfect blend, surrounded by plants and a camera.",
+        "w": 800,
+        "h": 533
+      },
+      {
+        "src": "/images/hobbies/illustration/06.jpg",
+        "thumb": "/images/hobbies/illustration/06-thumb.jpg",
+        "alt": "Framed red print of characters in a teal cup and a croissant, captioned Bake and make with love.",
+        "w": 800,
+        "h": 534
+      },
+      {
+        "src": "/images/hobbies/illustration/07.jpg",
+        "thumb": "/images/hobbies/illustration/07-thumb.jpg",
+        "alt": "Hand-drawn illustration of a red mug and a croissant high-fiving, captioned Croissant and coffee, happy tummy.",
+        "w": 800,
+        "h": 598
+      },
+      {
+        "src": "/images/hobbies/illustration/08.jpg",
+        "thumb": "/images/hobbies/illustration/08-thumb.jpg",
+        "alt": "The HanZz Studio logo: a smiling character painting at an easel under a red striped awning.",
+        "w": 800,
+        "h": 800
+      }
+    ]
+  },
+  {
+    "slug": "party-games",
+    "title": "Party games",
+    "description": "Game nights with friends. Costumes are optional but strongly encouraged.",
+    "images": [
+      {
+        "src": "/images/hobbies/party-games/01.jpg",
+        "thumb": "/images/hobbies/party-games/01-thumb.jpg",
+        "alt": "Five friends dressed as sheet ghosts wearing sunglasses, sitting on a sofa under red party lighting.",
+        "w": 800,
+        "h": 687
+      }
+    ]
+  },
+  {
+    "slug": "baking",
+    "title": "Baking cookies & playing around with recipes",
+    "description": "Cookie cut-outs, gingerbread people and the occasional recipe experiment that turns into a new favourite.",
+    "images": [
+      {
+        "src": "/images/hobbies/baking/01.jpg",
+        "thumb": "/images/hobbies/baking/01-thumb.jpg",
+        "alt": "Flat lay of cookie dough with star and heart cut-outs, decorated gingerbread cookies, eggs, candles and fir branches.",
+        "w": 800,
+        "h": 533
+      },
+      {
+        "src": "/images/hobbies/baking/02.jpg",
+        "thumb": "/images/hobbies/baking/02-thumb.jpg",
+        "alt": "Rolling pin, cookie dough with cut-out shapes, gingerbread people and a Christmas tree cookie on a plate, with eggs and candles.",
+        "w": 800,
+        "h": 641
+      }
+    ]
+  }
+]

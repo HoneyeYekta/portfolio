@@ -1,15 +1,7 @@
 {
   "degrees": [
-    { "title": "M.A. Visual Arts & Design", "school": "Tehran University of Art" },
-    { "title": "B.Sc. Architectural Engineering", "school": "Shomal University" }
-  ],
-  "development": [
-    {
-      "title": "HR Data Analytics & People Analytics",
-      "from": "2022-09",
-      "to": null,
-      "note": "Professional training plus hands-on HR projects; currently extending into Power BI and Workday."
-    }
+    { "title": "M.A. Visual Arts & Design", "school": "Tehran University of Art, Iran" },
+    { "title": "B.Sc. Architectural Engineering", "school": "Shomal University, Iran" }
   ],
   "languages": [
     { "name": "Persian", "level": "Native" },

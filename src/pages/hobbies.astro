@@ -1,0 +1,115 @@
+---
+import Base from '../layouts/Base.astro';
+import hobbies from '../data/hobbies.json';
+---
+
+<Base title="Hobbies & interests" description="What Honeye Yekta gets up to outside work: photo journaling, playful illustration, party games and baking.">
+  <header class="page-head">
+    <p class="eyebrow">Beyond work</p>
+    <h1>Hobbies & interests</h1>
+    <p class="lead muted">A few things I make, bake and play when I am not looking at HR data.</p>
+  </header>
+
+  <div class="hobbies">
+    {hobbies.map((h, i) => (
+      <section class="hobby" id={h.slug} aria-labelledby={`${h.slug}-title`}>
+        <div class="text">
+          <p class="eyebrow nums">{String(i + 1).padStart(2, '0')}</p>
+          <h2 id={`${h.slug}-title`}>{h.title}</h2>
+          <p class="muted">{h.description}</p>
+        </div>
+        <ul class:list={['gallery', `n-${Math.min(h.images.length, 3)}`]} aria-label={`${h.title} photos`}>
+          {h.images.map((img) => (
+            <li>
+              <a href={img.src} target="_blank" rel="noopener" aria-label={`Open full-size photo: ${img.alt}`}>
+                <img src={img.thumb} alt={img.alt} loading="lazy" width={img.w} height={img.h} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Base>
+
+<style>
+  .hobby {
+    display: grid;
+    gap: 18px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
+  .hobby:first-child {
+    border-top: 0;
+    padding-top: 4px;
+  }
+  .text {
+    max-width: 44ch;
+  }
+  .text .eyebrow {
+    margin-bottom: 6px;
+  }
+  .text h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  .text p:last-child {
+    font-size: 0.95rem;
+  }
+
+  .gallery {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .gallery li {
+    min-width: 0;
+  }
+  .gallery a {
+    display: block;
+    height: 100%;
+  }
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    transition: opacity 0.15s ease;
+  }
+  .gallery a:hover img,
+  .gallery a:focus-visible img {
+    opacity: 0.88;
+  }
+  /* one photo: natural aspect ratio, full width */
+  .gallery.n-1 {
+    grid-template-columns: 1fr;
+  }
+  .gallery.n-1 img {
+    aspect-ratio: auto;
+  }
+  /* three or more: mosaic with a large lead image */
+  .gallery.n-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .gallery.n-3 li:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  @media (min-width: 760px) {
+    .hobby {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 32px;
+      align-items: start;
+      padding: 40px 0;
+    }
+    .hobby:nth-child(even) .text {
+      order: 2;
+    }
+  }
+</style>
