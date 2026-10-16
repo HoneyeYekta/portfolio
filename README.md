@@ -83,8 +83,8 @@ npm run deploy
 ```
 
 The site is served at https://honeye.me, a custom domain declared under `routes` in `wrangler.jsonc`
-(the DNS zone is on the same Cloudflare account). The worker's `*.workers.dev` address keeps working
-as a secondary URL. If the public URL ever changes, update `site` in `astro.config.mjs` so canonical
+(the DNS zone is on the same Cloudflare account). The worker's `*.workers.dev` address is switched off
+(`workers_dev: false`) so there is a single public URL. If the public URL ever changes, update `site` in `astro.config.mjs` so canonical
 and social-preview links stay correct.
 
 ## Pushing from a shared machine

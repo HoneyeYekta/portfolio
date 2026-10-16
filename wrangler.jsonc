@@ -6,6 +6,9 @@
     "directory": "./dist",
     "not_found_handling": "404-page"
   },
-  // Custom domain (DNS zone on the same Cloudflare account). The *.workers.dev URL stays available too.
-  "routes": [{ "pattern": "honeye.me", "custom_domain": true }]
+  // Custom domain (DNS zone on the same Cloudflare account). The *.workers.dev address and
+  // preview URLs are switched off so honeye.me is the only public URL.
+  "routes": [{ "pattern": "honeye.me", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false
 }
