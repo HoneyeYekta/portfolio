@@ -18,6 +18,12 @@ const when = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }
 <Base title={title} description={summary} image={image}>
   <article class="project">
     <p class="back small"><a href="/projects/"><Icon name="arrow-left" />All projects</a></p>
+    {image && (
+      <figure class="cover">
+        <img src={image} alt={imageAlt} width="1280" height="720" fetchpriority="high" />
+      </figure>
+    )}
+
     <header>
       <p class="small muted nums">{when}</p>
       <h1>{title}</h1>
@@ -28,12 +34,6 @@ const when = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }
         </ul>
       )}
     </header>
-
-    {image && (
-      <figure class="cover">
-        <img src={image} alt={imageAlt} width="1280" height="720" fetchpriority="high" />
-      </figure>
-    )}
 
     <div class="prose">
       <Content />
@@ -59,7 +59,7 @@ const when = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }
     gap: 0.4em;
   }
   header {
-    margin: 12px 0 20px;
+    margin: 20px 0 20px;
     display: grid;
     gap: 10px;
   }
@@ -71,7 +71,7 @@ const when = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }
     max-width: 60ch;
   }
   .cover {
-    margin: 0 0 8px;
+    margin: 14px 0 0;
   }
   .cover img {
     width: 100%;

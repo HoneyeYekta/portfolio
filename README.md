@@ -31,6 +31,8 @@ from `profile.json`.
 
 Tips:
 
+- The sun/moon button in the sidebar switches between light and dark mode and remembers the choice
+  in the visitor's browser. Without a choice the site follows the device setting.
 - The career timeline on the homepage is drawn from the role dates in `experience.json` and the
   training dates in `education.json`. Fix a date there and the chart updates.
 - The email address is stored in two parts (`"user"` and `"domain"`) and only assembled in the

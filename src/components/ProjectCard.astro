@@ -8,13 +8,14 @@ interface Props {
 const { project } = Astro.props;
 const { title, summary, date, tools, link, article, image, status } = project.data;
 const upcoming = status === 'upcoming';
+const showImage = Boolean(image) && !upcoming;
 const href = `/projects/${project.id}/`;
 const when = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' }).format(date);
 const external = article ?? link;
 ---
 
-<article class:list={['card', { upcoming }]}>
-  {image && !upcoming && (
+<article class:list={['card', { upcoming, 'has-image': showImage }]}>
+  {showImage && (
     <a class="thumb" href={href} tabindex="-1" aria-hidden="true">
       <img src={image} alt="" loading="lazy" width="640" height="400" />
     </a>
@@ -26,25 +27,27 @@ const external = article ?? link;
     </div>
     <h3>{upcoming ? title : <a href={href}>{title}</a>}</h3>
     <p class="summary muted">{summary}</p>
-    {tools.length > 0 && (
-      <ul class="chips" aria-label="Tools">
-        {tools.map((t) => <li class="chip">{t}</li>)}
-      </ul>
-    )}
-    {!upcoming && external && (
-      <a class="more small" href={external} target="_blank" rel="noopener">Read on LinkedIn <ExternalIcon /></a>
-    )}
+    <div class="foot">
+      {tools.length > 0 && (
+        <ul class="chips" aria-label="Tools">
+          {tools.map((t) => <li class="chip">{t}</li>)}
+        </ul>
+      )}
+      {!upcoming && external && (
+        <a class="more small" href={external} target="_blank" rel="noopener">Read on LinkedIn <ExternalIcon /></a>
+      )}
+    </div>
   </div>
 </article>
 
 <style>
   .card {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: 14px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    overflow: hidden;
+    padding: 14px;
   }
   .card.upcoming {
     border-style: dashed;
@@ -52,19 +55,20 @@ const external = article ?? link;
   }
   .thumb {
     display: block;
-    border-bottom: 1px solid var(--line);
   }
   .thumb img {
     width: 100%;
     aspect-ratio: 16 / 10;
     object-fit: cover;
+    border-radius: 7px;
+    border: 1px solid var(--line);
   }
   .body {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 16px 18px 18px;
-    flex: 1;
+    gap: 8px;
+    padding: 2px 4px 4px;
+    min-width: 0;
   }
   .meta {
     display: flex;
@@ -89,10 +93,28 @@ const external = article ?? link;
   .summary {
     font-size: 0.95rem;
   }
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+    margin-top: auto;
+    padding-top: 4px;
+  }
   .more {
     display: inline-flex;
     align-items: center;
     gap: 0.3em;
-    margin-top: auto;
+    white-space: nowrap;
+  }
+  @media (min-width: 640px) {
+    .card.has-image {
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 18px;
+    }
+    .thumb {
+      align-self: start;
+    }
   }
 </style>

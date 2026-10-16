@@ -1,6 +1,6 @@
 /* ---- Design tokens -------------------------------------------------- */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --bg: #fafaf8;
   --surface: #ffffff;
   --ink: #1b1f23;
@@ -18,8 +18,11 @@
   --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Dark tokens apply when the OS prefers dark and no manual choice was made,
+   or when the visitor chose dark with the toggle. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --bg: #0f1215;
     --surface: #161a1e;
     --ink: #e9ebed;
@@ -31,6 +34,42 @@
     --chart-1: #3987e5;
     --chart-2: #d95926;
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1215;
+  --surface: #161a1e;
+  --ink: #e9ebed;
+  --ink-2: #aab3bc;
+  --ink-3: #7f8993;
+  --line: #262c33;
+  --accent: #3987e5;
+  --accent-soft: #12263d;
+  --chart-1: #3987e5;
+  --chart-2: #d95926;
+}
+
+/* Theme toggle icon: show the mode you would switch to. */
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun {
+    display: block;
+  }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon {
+    display: none;
+  }
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
 }
 
 /* ---- Base ----------------------------------------------------------- */
