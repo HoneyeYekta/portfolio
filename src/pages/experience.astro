@@ -9,28 +9,20 @@ import education from '../data/education.json';
 import type { IconName } from '../components/Icon.astro';
 
 type Kind = 'hr' | 'other' | 'training';
-const hr = experience.filter((e) => e.kind === 'hr');
-const additional = experience.filter((e) => e.kind !== 'hr');
 ---
 
-<Base title="Experience" description="Work experience, additional experience and education of Honeye Yekta.">
+<Base title="Experience" description="Work experience, professional development and education of Honeye Yekta.">
   <PageHead
     icon="briefcase"
     eyebrow="Experience"
     title="Where I have worked"
-    lead="Talent acquisition roles where I started using data to understand and improve the hiring process, and what I have been building since moving to the Netherlands."
+    lead="Talent acquisition and HR consulting roles where data has become part of how I understand and improve hiring, with a period of professional development after moving to the Netherlands."
   />
 
   <h2 class="group-title">Professional experience</h2>
   <div class="group">
-    {hr.map((job) => <ExperienceItem {...job} kind={job.kind as Kind} icon={job.icon as IconName} />)}
+    {experience.map((job) => <ExperienceItem {...job} kind={job.kind as Kind} icon={job.icon as IconName} />)}
   </div>
-
-  <Section id="additional" icon="globe" title="Relocation to the Netherlands & additional experience">
-    <div class="group">
-      {additional.map((job) => <ExperienceItem {...job} kind={job.kind as Kind} icon={job.icon as IconName} />)}
-    </div>
-  </Section>
 
   <Section id="education" icon="graduation" title="Education">
     <div class="group">

@@ -10,7 +10,7 @@ How to change the content of honeye.me, add projects and photos, run the site lo
 | `/` | Intro, career timeline, latest two projects | `src/data/profile.json`, `experience.json`, projects |
 | `/projects/` | All projects, one per row (upcoming first, then newest) | `src/content/projects/*.md` |
 | `/projects/<name>/` | One project: cover image, write-up, links | the matching `.md` file |
-| `/experience/` | Professional experience, additional experience, education | `experience.json`, `education.json` |
+| `/experience/` | Professional experience in one chronological list, then education | `experience.json`, `education.json` |
 | `/skills/` | Skills, tools, languages | `skills.json`, `education.json` |
 | `/hobbies/` | Hobbies & interests with photo galleries | `hobbies.json`, `public/images/hobbies/` |
 
@@ -23,7 +23,7 @@ page and reads from `profile.json`.
 |---|---|
 | Name, headline, tagline, intro paragraphs (`summary`, each with an optional `icon`), short `metaDescription` for search and social previews, location, links, availability, "Made with" line | `src/data/profile.json` |
 | Work and additional experience (see below) | `src/data/experience.json` |
-| Skills and tools (with optional level like "Developing") | `src/data/skills.json` |
+| Skills in three groups: `core`, `tools`, `learning` (entries may carry a `level` such as "Foundational knowledge") | `src/data/skills.json` |
 | Education and languages | `src/data/education.json` |
 | Hobbies: title, one-line description, photos with alt text | `src/data/hobbies.json` |
 | Projects (one file each) | `src/content/projects/*.md` |
@@ -35,9 +35,13 @@ page and reads from `profile.json`.
 
 Each entry in `experience.json` has an `icon` (shown in the circle next to the entry) and a `kind`:
 
-- `hr` — shown under "Professional experience" and drawn in blue on the timeline
-- `other` — side projects and ventures, shown under "Relocation to the Netherlands & additional experience", teal on the timeline
-- `training` — professional development, same section, orange on the timeline
+- `hr` — a job; drawn in blue on the timeline (legend: "Role")
+- `training` — a period of courses or self-study; orange on the timeline (legend: "Training")
+- `other` — side projects or ventures; teal on the timeline (legend: "Project")
+
+Entries are shown in the order they appear in the file. The timeline sorts by start date and its legend
+only lists the kinds that are in use. An optional `short` field gives a shorter name for the timeline
+when the heading (`company`) is long.
 
 Dates are `"YYYY-MM"`, or just `"YYYY"` when only the year is known; `"to": null` means present. The
 career timeline on the homepage is drawn from these dates, so fixing a date there updates the chart.

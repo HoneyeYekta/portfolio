@@ -7,6 +7,8 @@ interface Props {
   kind?: 'hr' | 'other' | 'training';
   icon?: IconName;
   company: string;
+  /** Shorter name used on the career timeline. */
+  short?: string;
   note?: string;
   location?: string;
   roles: { title: string; from: string; to?: string | null }[];

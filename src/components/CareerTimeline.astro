@@ -9,10 +9,10 @@ import { toFraction, fmtMonth, fmtRange, durationLabel } from '../lib/dates';
 type Kind = 'hr' | 'training' | 'other';
 type Item = { label: string; sub: string; from: string; to: string | null; kind: Kind };
 
-const series: { kind: Kind; label: string }[] = [
-  { kind: 'hr', label: 'HR role' },
-  { kind: 'other', label: 'Other experience' },
-  { kind: 'training', label: 'Training' },
+const allSeries: { kind: Kind; label: string; plural: string }[] = [
+  { kind: 'hr', label: 'Role', plural: 'roles' },
+  { kind: 'other', label: 'Project', plural: 'projects' },
+  { kind: 'training', label: 'Training', plural: 'training' },
 ];
 
 const now = new Date();
@@ -20,7 +20,7 @@ const items: Item[] = experience
   .flatMap((job) =>
     job.roles.map((r) => ({
       label: r.title,
-      sub: job.company,
+      sub: ('short' in job && job.short) || job.company,
       from: r.from,
       to: r.to ?? null,
       kind: job.kind as Kind,
@@ -28,25 +28,33 @@ const items: Item[] = experience
   )
   .sort((a, b) => toFraction(b.from) - toFraction(a.from));
 
+// Only the series that actually appear in the data show up in the legend.
+const series = allSeries.filter((s) => items.some((i) => i.kind === s.kind));
+const what = series.map((s) => s.plural);
+const whatText = what.length > 1 ? `${what.slice(0, -1).join(', ')} and ${what[what.length - 1]}` : what[0] ?? '';
+
 const nowT = toFraction(null, now);
 const minYear = Math.floor(Math.min(...items.map((i) => toFraction(i.from))));
 const maxYear = Math.ceil(Math.max(...items.map((i) => toFraction(i.to, now, true))) + 0.01);
 const span = maxYear - minYear;
 const pct = (t: number) => ((t - minYear) / span) * 100;
 const years = Array.from({ length: span + 1 }, (_, i) => minYear + i);
+const capital = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 ---
 
 <figure class="tl" aria-labelledby="tl-title">
   <figcaption class="tl-head">
     <div>
       <h2 id="tl-title">Career timeline</h2>
-      <p class="small muted">Roles, projects and training, {minYear} to today</p>
+      <p class="small muted">{capital(whatText)}, {minYear} to today</p>
     </div>
-    <ul class="tl-legend" aria-label="Legend">
-      {series.map((s) => (
-        <li><i class:list={['sw', s.kind]}></i>{s.label}</li>
-      ))}
-    </ul>
+    {series.length > 1 && (
+      <ul class="tl-legend" aria-label="Legend">
+        {series.map((s) => (
+          <li><i class:list={['sw', s.kind]}></i>{s.label}</li>
+        ))}
+      </ul>
+    )}
   </figcaption>
 
   <div class="tl-plot">
@@ -92,7 +100,7 @@ const years = Array.from({ length: span + 1 }, (_, i) => minYear + i);
           <tr>
             <td>{it.label}</td>
             <td>{it.sub}</td>
-            <td>{series.find((s) => s.kind === it.kind)?.label}</td>
+            <td>{allSeries.find((s) => s.kind === it.kind)?.label}</td>
             <td>{fmtMonth(it.from)}</td>
             <td>{fmtMonth(it.to)}</td>
           </tr>

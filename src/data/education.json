@@ -1,11 +1,10 @@
 {
   "degrees": [
-    { "title": "M.A. Visual Arts & Design", "school": "Tehran University of Art, Iran" },
     { "title": "B.Sc. Architectural Engineering", "school": "Shomal University, Iran" }
   ],
   "languages": [
-    { "name": "Persian", "level": "Native" },
     { "name": "English", "level": "Professional working proficiency" },
-    { "name": "Dutch", "level": "A2, currently learning" }
+    { "name": "Dutch", "level": "A2, currently learning" },
+    { "name": "Persian", "level": "Native" }
   ]
 }

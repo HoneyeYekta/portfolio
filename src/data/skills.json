@@ -1,20 +1,24 @@
 {
   "core": [
-    "HR Analytics",
-    "People Analytics",
+    "Full-Cycle Recruitment",
+    "Talent Acquisition",
+    "Recruitment Coordination",
+    "Hiring Manager Collaboration",
     "Recruitment Analytics",
-    "HR Reporting",
-    "Data Quality",
-    "KPI Tracking",
+    "Hiring KPIs & Reporting",
+    "Candidate Experience",
+    "ATS & Data Quality",
     "Process Improvement",
     "Stakeholder Management"
   ],
   "tools": [
     { "name": "Microsoft Excel" },
     { "name": "Google Sheets" },
-    { "name": "Power BI", "level": "Developing" },
-    { "name": "SQL", "level": "Developing" },
-    { "name": "ATS & HR systems" },
-    { "name": "Workday", "level": "Developing" }
+    { "name": "ATS & HR Systems" }
+  ],
+  "learning": [
+    { "name": "SQL" },
+    { "name": "Power BI" },
+    { "name": "Workday", "level": "Foundational knowledge" }
   ]
 }
